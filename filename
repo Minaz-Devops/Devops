@@ -1,0 +1,178 @@
+  cat filename - to open a file
+  cat >> filename - to create a file,append the data
+ 
+vi :
+  vi filename - to create a new file/open the file
+  3 modes:
+  - escape mode - default mode(gg(1st line), G(last line), 5gg, 7gg, 2gg..., u(undo), yy(copy), p(paste)) 
+  - insert mode - 6 types(i, I, a, A, o, O)
+  - command mode :
+        - shift+: wq - enter --> save and quit
+        - shift+: q! - enter --> without save and quit
+
+List :
+   ls -l - with details
+   ls -lt - time order
+   ls -lS - size order
+   
+Remove (file/directory):
+   rm filename --> remove? y/n --> will delete
+   rm -f filename --> deleted without asking(-f - force)
+   rm -d dirname --> remove?y/n --> will delete
+   rm -d -f dirname --> removed
+   rm -rd directorynme --> forcefully delete
+   rmdir dirname --> deleted
+
+help- man command (eg : man cat)
+--------------------------------------------------------------------
+Adding user:
+useradd username 
+
+setting password:
+passwd username
+
+-open new putty session and login as new username
+
+cant login --> need to change etc file
+  - first puttysession (root user) - vi /etc/ssh/sshd_config
+  - scroll down --> (passwordAuthentication yes)
+  - shift:wq
+
+service sshd restart
+
+Now able to login
+---------------------------------------------------------------------
+To make new user as root user:
+firstputty session(rootuser) - vi /etc/sudoers
+  - scroll down --> lastline(username ALL=(ALL) NOPASSWD: ALL)
+  - second session(newuser) -->sudo -i--> able to access 
+---------------------------------------------------------------------
+creating group:
+groupadd groupname
+
+Addding user to group:
+usermod -g groupname user
+gpasswd -a user group
+
+Remove user from group:
+gpasswd -d user group
+
+REMOVE USER :
+userdel -r username
+-------------------------------------------------------------------------
+Permissions:
+r - 4 
+w - 2
+x-execute - 1
+----------
+owner  grp   others
+rw    --r   --r 
+6       4     4
+
+rwx   --rx  --rx
+7       5     5
+
+rw     --     --
+6       0     0
+
+rw     --rw   --rw
+6       6      6
+
+r       r      r
+4       4      4
+
+change ownership:
+chown username filename
+
+change group:
+chgrp group(root/any) filename
+
+change file permissions:
+chmod 644 filename
+
+CHANGE FILE PERMISSION OF FOLDER RECURSIVELY:
+chmod -R 644 filename
+------------------------------------------------------------------------
+How to check RAM info:
+free -m
+or
+top
+ctrl +c
+
+CPU:
+lscpu
+
+storage:
+lsblk
+--------------------------------------------------------------------------
+Installing application:
+
+.rpm(redhat package manager) file only works in linux
+
+Installation:
+----------------
+yum install git
+yum install java
+yum install docker
+yum install httpd
+
+-----------------------------------------------------------------------------
+To see the repository:
+------------------------
+yum repolist
+
+To add new repository(epel):
+--------------------------------
+yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+
+yum-config-manager --enable epel
+
+To see the added repo file:
+-------------------------------
+cd /etc/yum.repos.d
+ls
+vi epel.repo
+
+To see the status of application:
+-----------------------------------
+systemctl status appname(eg:httpd)
+
+to start application:
+----------------------------
+systemctl start appname(eg:httpd)
+
+to stop application:
+---------------------------
+systemctl stop appname(eg:httpd)
+
+PROCESS MANAGEMENT:
+---------------------
+ps -ef - will show all available process
+top
+shift +m - list memory based 
+
+To kill the app:
+-------------------
+kill -9 number[2nd column](eg:1244)
+
+Website Hosting:
+--------------------
+several webservices there to host a website.For each application, there is port number. 
+Connection is established via that port
+-httpd - 80 (by default)
+-tomcat -8080
+-iis 
+-apache -80
+-nginx -80
+
+
+clear
+
+
+
+
+
+
+
+
+
